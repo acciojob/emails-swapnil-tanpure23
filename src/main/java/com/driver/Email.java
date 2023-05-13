@@ -27,26 +27,31 @@ public class Email {
         // 4. It contains at least one digit
         // 5. It contains at least one special character. Any character apart from alphabets and digits is a special character
         
-        if (oldPassword.equals(password) && isValidPassword(newPassword)) {
-        password = newPassword;
-    }
-    }
-    private boolean isValidPassword(String password) {
-    if (password.length() < 8) {
+        if (!this.password.equals(oldPassword)) {
         return false;
     }
-    boolean hasUpperCase = false, hasLowerCase = false, hasDigit = false, hasSpecial = false;
-    for (char c : password.toCharArray()) {
-        if (Character.isUpperCase(c)) {
+    if (newPassword.length() < 8) {
+        return false;
+    }
+    boolean hasUpperCase = false;
+    boolean hasLowerCase = false;
+    boolean hasDigit = false;
+    boolean hasSpecialChar = false;
+    for (char ch : newPassword.toCharArray()) {
+        if (Character.isUpperCase(ch)) {
             hasUpperCase = true;
-        } else if (Character.isLowerCase(c)) {
+        } else if (Character.isLowerCase(ch)) {
             hasLowerCase = true;
-        } else if (Character.isDigit(c)) {
+        } else if (Character.isDigit(ch)) {
             hasDigit = true;
         } else {
-            hasSpecial = true;
+            hasSpecialChar = true;
         }
     }
-    return hasUpperCase && hasLowerCase && hasDigit && hasSpecial;
+    if (!hasUpperCase || !hasLowerCase || !hasDigit || !hasSpecialChar) {
+        return false;
+    }
+    this.password = newPassword;
+    return true;
 }
 }
