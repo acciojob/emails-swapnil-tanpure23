@@ -106,4 +106,26 @@ public class Gmail extends Email {
         // Return the maximum number of mails that can be stored in the inbox
         return inboxCapacity;
     }
+    private static class Mail {
+    private Date date;
+    private String senderId;
+    private String message;
+
+    public Mail(Date date, String senderId, String message) {
+        this.date = date;
+        this.senderId = senderId;
+        this.message = message;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public String getSenderId() {
+        return senderId;
+    }
+
+    public String getMessage() {
+        return message;
+    }
 }
