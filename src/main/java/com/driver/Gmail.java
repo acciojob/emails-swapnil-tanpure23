@@ -104,5 +104,6 @@ public class Gmail extends Email {
 
     public int getInboxCapacity() {
         // Return the maximum number of mails that can be stored in the inbox
+        return inboxCapacity;
     }
 }
