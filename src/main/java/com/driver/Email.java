@@ -11,29 +11,20 @@ public class Email {
         this.password = "Accio@123";
     }
 
-    public void changePassword(String oldPassword, String newPassword) {
-    if (oldPassword.equals(password) && isValidPassword(newPassword)) {
-        password = newPassword;
-    }
-}
-
-private boolean isValidPassword(String password) {
-    if (password.length() < 8) {
+    public boolean changePassword(String oldPassword, String newPassword) {
+        if (oldPassword.equals(password) && isPasswordValid(newPassword)) {
+            password = newPassword;
+            return true;
+        }
         return false;
     }
-    boolean hasUpperCase = false, hasLowerCase = false, hasDigit = false, hasSpecial = false;
-    for (char c : password.toCharArray()) {
-        if (Character.isUpperCase(c)) {
-            hasUpperCase = true;
-        } else if (Character.isLowerCase(c)) {
-            hasLowerCase = true;
-        } else if (Character.isDigit(c)) {
-            hasDigit = true;
-        } else {
-            hasSpecial = true;
-        }
-    }
-    return hasUpperCase && hasLowerCase && hasDigit && hasSpecial;
-}
+
+    private boolean isPasswordValid(String password) {
+        String regex = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$";
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(password);
+        return matcher.matches();
+    
+
 }
 }
